@@ -1,0 +1,38 @@
+# 이 워크플로우는 Data Dog 조직 내에서 Data Dog Synthetic 테스트를 트리거합니다.
+# GitHub 워크플로우 내에서 Synthetic 테스트를 실행하는 방법에 대한 자세한 내용은 https://docs.datadoghq.com/synthetics/cicd_integrations/github_actions/ 를 참조하십시오.
+
+# 이 워크플로는 GitHub에서 인증되지 않은 작업을 사용합니다.
+# 제3자가 제공하고 관리합니다.
+# 개별 서비스 약관, 개인 정보 보호 정책 및 지원
+# 문서화
+
+# 시작하려면:
+
+# 1. 데이터독 API(DD_API_KEY)와 애플리케이션 키(DD_APP_KEY)를 GitHub 저장소에 비밀로 추가합니다. 자세한 내용은 https://docs.datadoghq.com/account_management/api-app-keys/ 를 참조하십시오.
+# 2. 워크플로우 내에서 작업 사용 시작
+
+이름.: 데이터독 합성 테스트 실행
+
+위에:
+ 밀다:
+ 나뭇가지: [ "메인" ]
+ pull_request:
+ 나뭇가지: [ "메인" ]
+
+일:
+ 짓다:
+ 뜀박질의: 우분투-latest
+
+ 걸음걸이:
+-  사용하다: 작업/checkout@v2
+
+    # GitHub 워크플로우 내에서 합성 테스트를 실행합니다.
+    # 추가 구성 옵션에 대해서는 마켓플레이스 내의 조치(https://github.com/marketplace/actions/datadog-synthetics-ci 를 참조하십시오.
+ - 이름.: 데이터독 합성 테스트 실행
+ 사용하다: DataDog/synthetics-ci-github-action@2b56dc0cca9daa14ab69c0d1d6844296de8f941e
+ 와 함께:
+ api_key: ${secrets.DD_API_KEY}
+ app_key: ${secrets.DD_APP_KEY}}
+ test_search_query: 'tag:e2e-tests' #이 태그를 태그 전략에 맞게 수정합니다.
+
+
